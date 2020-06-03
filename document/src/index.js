@@ -1,35 +1,48 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-class FlavorForm extends React.Component {
+class Reservation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "coconut" };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      isGoing: true,
+      numberOfGuests: 2,
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-  handleSubmit(event) {
-    alert("Your favorite flavor is:" + this.state.value);
-    event.preventDefault();
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.name === "isGoing" ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <label>
-          Pick your favoerite flavor:
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruite">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mongo">Mongo</option>
-          </select>
+          Is going:
+          <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.isGoing}
+            onChange={this.handleInputChange}
+          />
         </label>
-        <input type="submit" value="Submit" />
+        <br />
+        <label>
+          NUmber of guests:
+          <input
+            name="numberOfGuests"
+            type="number"
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange}
+          />
+        </label>
       </form>
     );
   }
 }
-ReactDOM.render(<FlavorForm />, document.getElementById("root"));
+
+ReactDOM.render(<Reservation />, document.getElementById("root"));
