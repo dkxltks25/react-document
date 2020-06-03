@@ -1,48 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-class Reservation extends React.Component {
+function BolingVerdict(props) {
+  if (props.celsius >= 100) {
+    return <p> The water would boil.</p>;
+  }
+  return <p>The water would not boil.</p>;
+}
+
+class Calculator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isGoing: true,
-      numberOfGuests: 2,
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = { temperature: "" };
   }
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.name === "isGoing" ? target.checked : target.value;
-    const name = target.name;
+  handleChange(event) {
     this.setState({
-      [name]: value,
+      temperature: event.target.value,
     });
   }
   render() {
+    const temperature = this.state.temperature;
     return (
-      <form>
-        <label>
-          Is going:
-          <input
-            name="isGoing"
-            type="checkbox"
-            checked={this.state.isGoing}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          NUmber of guests:
-          <input
-            name="numberOfGuests"
-            type="number"
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange}
-          />
-        </label>
-      </form>
+      <fieldset>
+        <legend>Enter temperature in Celsius:</legend>
+        <input value={temperature} onChange={this.handleChange} />
+        <BolingVerdict celsius={parseFloat(temperature)} />
+      </fieldset>
     );
   }
 }
-
-ReactDOM.render(<Reservation />, document.getElementById("root"));
+ReactDOM.render(<Calculator />, document.getElementById("root"));
