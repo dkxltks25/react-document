@@ -1,39 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const scaleNames = {
-  c: "Celsius",
-  f: "Fahrenheit",
-};
+function FancyBorder(props) {
+  return (
+    <div className={"FancyBorder FancyBorder-" + props.color}>
+      {props.children}
+    </div>
+  );
+}
 
-class TemperatureInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { temperature: "" };
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(e) {
-    this.setState({ temperature: e.target.value });
-  }
-  render() {
-    const temperature = this.state.temperature;
-    const scale = this.props.scale;
-    return (
-      <fieldset>
-        <legend>Enter temperature in {scaleNames[scale]}: </legend>
-        <input value={temperature} onChange={this.handleChange} />
-      </fieldset>
-    );
-  }
+function WelcomDialog() {
+  return (
+    <FancyBorder color="red">
+      <h1 className="Dialog-title">Welcome</h1>
+      <p className="Dialog-message">Tank you form visiting our spaceraft!</p>
+    </FancyBorder>
+  );
 }
-class Calculator extends React.Component {
-  render() {
-    return (
-      <div>
-        <TemperatureInput sacle="c"/>
-        <TemperatureInput sacle="f"/> 
-      </div>
-    )
-  }
-}
-ReactDOM.render(<Calculator />, document.getElementById("root"));
+
+ReactDOM.render(<WelcomDialog />, document.getElementById("root"));
