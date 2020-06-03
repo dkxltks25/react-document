@@ -1,6 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+function Contacts() {
+  return <div className="Contacts" />;
+}
+
+function Chat() {
+  return <div className="Chat" />;
+}
+
+
 function FancyBorder(props) {
   return (
     <div className={"FancyBorder FancyBorder-" + props.color}>
@@ -18,4 +27,15 @@ function WelcomDialog() {
   );
 }
 
+function SplitPane(props) {
+  return (
+    <div className="SplitePane">
+      <div className="SplitPane-left">{props.left}</div>
+      <div className="SplitPane-right">{props.right}</div>
+    </div>
+  );
+}
+function App() {
+  return <SplitPane left={<Contacts />} right={<Chat />} />;
+}
 ReactDOM.render(<WelcomDialog />, document.getElementById("root"));
