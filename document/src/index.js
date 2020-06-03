@@ -1,33 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-class EssayForm extends React.Component {
+class FlavorForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: "Please write an essay about your favorite DOM element",
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { value: "coconut" };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
   handleSubmit(event) {
-    alert("An essay was submitted: " + this.state.value);
+    alert("Your favorite flavor is:" + this.state.value);
     event.preventDefault();
   }
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Essay :{" "}
-          <textarea value={this.state.value} onChange={this.handleChange} />
+          Pick your favoerite flavor:
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value="grapefruite">Grapefruit</option>
+            <option value="lime">Lime</option>
+            <option value="coconut">Coconut</option>
+            <option value="mongo">Mongo</option>
+          </select>
         </label>
-        <input type="submit" value="submit" />
+        <input type="submit" value="Submit" />
       </form>
     );
   }
 }
-
-ReactDOM.render(<EssayForm />, document.getElementById("root"));
+ReactDOM.render(<FlavorForm />, document.getElementById("root"));
